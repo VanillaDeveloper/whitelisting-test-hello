@@ -16,7 +16,7 @@ router.get('/', (req,res) => {
 });
 
 router.post('/', (req,res) => {
-    const user = req.body;
+    const user = JSON.parse(req.body);
 
     users.push(user)
 
@@ -40,7 +40,7 @@ router.delete('/:hwid', (req,res) => {
     res.send(`User with the hwid ${hwid} blacklisted.`)
 });
 
-app.use(bodyParser.json(), router);
+app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
