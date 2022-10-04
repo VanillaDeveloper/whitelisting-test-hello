@@ -18,7 +18,7 @@ router.post('/', (req,res) => {
 
     users.push(user)
 
-    res.send(`User with the HWID Of ${user.hardwareId} added to the whitelist.`)
+    res.send(user)
 });
 
 router.get('/:hwid', (req, res) => {
