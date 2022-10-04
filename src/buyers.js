@@ -40,7 +40,7 @@ router.delete('/:hwid', (req,res) => {
     res.send(`User with the hwid ${hwid} blacklisted.`)
 });
 
-app.use(`/.netlify/functions/api`, router);
+app.use(`/.netlify/functions/buyers`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
