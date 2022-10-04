@@ -1,5 +1,7 @@
 const express = require("express");
 const serverless = require("serverless-http");
+const bodyParser = require('body-parser');
+
 
 const app = express();
 const router = express.Router();
@@ -38,7 +40,7 @@ router.delete('/:hwid', (req,res) => {
     res.send(`User with the hwid ${hwid} blacklisted.`)
 });
 
-app.use(`/.netlify/functions/buyers`, router);
+app.use(bodyParser.json(), router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
