@@ -9,11 +9,11 @@ let users = [
 ]
 
 // all routes here are starting with /buyers, for whitelisting purposes.
-router.get('/.netlify/functions/buyers', (req,res) => {
+router.get('/', (req,res) => {
     res.send(users)
 });
 
-router.post('/.netlify/functions/buyers/', (req,res) => {
+router.post('/', (req,res) => {
     const user = req.body;
 
     users.push(user)
@@ -21,7 +21,7 @@ router.post('/.netlify/functions/buyers/', (req,res) => {
     res.send(`User with the HWID Of ${user.hardwareId} added to the whitelist.`)
 });
 
-router.get('/.netlify/functions/buyers/:hwid', (req, res) => {
+router.get('/:hwid', (req, res) => {
     const { hwid } = req.params;
 
     const foundUser = users.find((user) => user.hardwareId == hwid);
@@ -29,7 +29,7 @@ router.get('/.netlify/functions/buyers/:hwid', (req, res) => {
     res.send(foundUser);
 });
 
-router.delete('/.netlify/functions/buyers/:hwid', (req,res) => {
+router.delete('/:hwid', (req,res) => {
     const { hwid } = req.params;
 
     users = users.filter((user) => user.hardwareId != hwid);
@@ -38,7 +38,7 @@ router.delete('/.netlify/functions/buyers/:hwid', (req,res) => {
     res.send(`User with the hwid ${hwid} blacklisted.`)
 });
 
-app.use(`/.netlify/functions/api`, router);
+app.use(`/.netlify/functions/buyers`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
